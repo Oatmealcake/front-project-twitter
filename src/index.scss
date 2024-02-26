@@ -3,11 +3,12 @@ $activeBg: #303d58;
 $white: #fff;
 $border: #708090;
 $gray: #6b7290;
+$grayDark: #565b72;
 $grayText: #9ca3af;
 $primaryColor: #60a5fa;
 $activeBorder: #3b82f6;
 $danger: #dc2626;
-$danger: #8b1d1d;
+$dangerDark: #8b1d1d;
 
 $font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -44,6 +45,38 @@ body {
   border: none;
   cursor: pointer;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+
+// footer
+.footer {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: transparent;
+  color: $white;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    background-color: transparent;
+
+    button {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 0;
+      border: none;
+      font-size: 15px;
+      background-color: transparent;
+      backdrop-filter: blur(10px);
+    }
+  }
 }
 
 // home layout
@@ -126,7 +159,92 @@ body {
 
   &__submit-btn {
     @extend .button;
-    padding: 0.5red 1rem;
+    padding: 0.5rem 1rem;
     background-color: $primaryColor;
+  }
+}
+
+// Post Layout
+.post {
+  padding-bottom: 40px;
+
+  &__flex {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  &__email, &__createdAt {
+    font-size: 12px;
+    color: $grayText;
+  }
+
+  &__box {
+    padding: 10px 0;
+    border-bottom: 1px solid $border;
+    text-decoration: none;
+
+    a {
+      text-decoration: none;
+    }
+  
+    &-profile {
+      padding: 0 10px;
+      text-decoration: none;
+
+      &-img, &-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+    }
+
+    &-content {
+      display: block;
+      padding: 16px 4px;
+      font-weight: 500;
+    }
+
+    &-footer {
+      display: flex;
+      gap: 8px;
+      flex-direction: row-reverse;
+      padding: 0 16px;
+      margin: 10px;
+      font-size: 14px;
+
+      button {
+        @extend .button;
+
+        &.post__delete {
+          background-color: $danger;
+
+          &:hover, &:focus {
+            background-color: $dangerDark;
+          }
+        }
+
+        &.post__edit {
+          background-color: $gray;
+          
+          a {
+            background-color: transparent;
+          }
+
+          &:hover, &:focus {
+            background-color: $grayDark;
+          }
+        }
+
+        &.post__likes, &.post__comments {
+          @extend .post__flex;
+
+          &:hover, &:focus {
+            color: $gray;
+          }
+        }
+      }
+    }
   }
 }
